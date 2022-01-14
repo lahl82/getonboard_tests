@@ -6,7 +6,9 @@
 import React, { useEffect, useState } from "react";
 import './App.css';
 
-const calculateTimeLeft = () => {
+
+function App() {
+  const calculateTimeLeft = () => {
     let year = new Date().getFullYear();
     let difference = +new Date(`12/25/${year}`) - +new Date();
 
@@ -22,34 +24,34 @@ const calculateTimeLeft = () => {
     }
 
     return timeLeft;
-}
+  }
 
-const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-const [year] = useState(new Date().getFullYear());
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  const [year] = useState(new Date().getFullYear());
 
-useEffect(() => {
-    const timer = setTimeout(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
+  useEffect(() => {
+      const timer = setTimeout(() => {
+        setTimeLeft(calculateTimeLeft());
+      }, 1000);
 
-    return () => clearTimeout(timer);
-});
+      return () => clearTimeout(timer);
+  });
 
-const timerComponents = [];
+  const timerComponents = [];
 
-Object.keys(timeLeft).forEach((interval) => {
-    if (!timeLeft[interval]) {
-      return;
-    }
-  
-    timerComponents.push(
-      <span>
-        {timeLeft[interval]} {interval}{" "}
-      </span>
-    );
-});
+  Object.keys(timeLeft).forEach((interval) => {
+      if (!timeLeft[interval]) {
+        return;
+      }
+    
+      timerComponents.push(
+        <span>
+          {timeLeft[interval]} {interval}{" "}
+        </span>
+      );
+  });
 
-function App() {
+
   return (
     <div>
         <h1>Christmas {year} Countdown</h1>
